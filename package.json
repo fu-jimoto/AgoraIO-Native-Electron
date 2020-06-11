@@ -1,0 +1,53 @@
+{
+  "name": "electron-react-webpack",
+  "version": "1.0.0",
+  "description": "Electron + React 16 + Webpack 4 template.",
+  "main": "main.js",
+  "build": {
+    "asar": false,
+    "files": [
+      "build/**/*",
+      "main.js",
+      "index.html",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "hardenedRuntime": false
+    }
+  },
+  "scripts": {
+    "bundle": "webpack --mode development",
+    "serve": "electron .",
+    "serve-dev": "rimraf build && wait-on build/bundle.js && electron .",
+    "dev": "cross-env NODE_ENV=development npm-run-all --parallel bundle serve-dev",
+    "compile": "electron-webpack",
+    "dist": "cross-env NODE_ENV=production webpack --mode development && electron-builder",
+    "dist-win": "cross-env NODE_ENV=production webpack --mode development && electron-builder --win --ia32"
+  },
+  "author": "",
+  "repository": "",
+  "license": "",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-react": "^6.24.1",
+    "cross-env": "^6.0.3",
+    "css-loader": "^0.28.10",
+    "electron": "5.0.8",
+    "electron-builder": "^22.2.0",
+    "electron-reload": "^1.2.2",
+    "electron-webpack": "^2.7.4",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.10",
+    "npm-run-all": "^4.1.2",
+    "rimraf": "^3.0.0",
+    "wait-on": "^3.3.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^3.1.1"
+  },
+  "dependencies": {
+    "agora-electron-sdk": "latest",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}

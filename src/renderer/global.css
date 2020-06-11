@@ -1,0 +1,54 @@
+/*
+ * Global constants goes here
+ */
+:root {
+    --primary-color: #42b983;
+}
+
+
+/*
+ * Global CSS goes here, it requires to use :global before each style
+ */
+:global html {
+    height: 100%;
+}
+:global body {
+    /*display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: auto;*/
+    margin: 0;
+}
+:global #app {
+    color: #2c3e50;
+    max-width: 640px;
+    font-family: Source Sans Pro, Helvetica, sans-serif;
+    /*text-align: center;*/
+    position: relative;
+}
+:global #app p {
+    text-align: justify;
+}
+:global .hello {
+    color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:global .video {
+    width: 640px;
+    height: 360px;
+    overflow: hidden;
+}
+
+:global .console{
+    height: 20px;
+    width: 100%;
+    background-color: #89c7de;
+    color: #fff;
+    text-align: center;
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+}
