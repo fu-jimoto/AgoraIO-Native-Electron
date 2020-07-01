@@ -7,6 +7,20 @@ import os from 'os'
 const APPID = YOUR APPID
 
 export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    changeResolution(resolution){
+        if(resolution.target.value == "480P"){
+            rtcEngine.setVideoEncoderConfiguration({width: 848, height: 480, frameRate: 30, bitrate: 930})
+        }else{
+            rtcEngine.setVideoEncoderConfiguration({width: 1280, height: 720, frameRate: 30, bitrate: 1710})
+        }
+        console.log(resolution.target.value);
+    }
+
     componentDidMount(){
         if(global.rtcEngine) {
             global.rtcEngine.release()
@@ -54,18 +68,24 @@ export default class App extends Component {
         })
 
         // set channel profile, 0: video call, 1: live broadcasting
+        
         rtcEngine.setChannelProfile(1)
         rtcEngine.setClientRole(1)
         
+        rtcEngine.setVideoEncoderConfiguration({width: 1280, height: 720, frameRate: 30, bitrate: 1710})
+
         // enable video, call disableVideo() is you don't need video at all
         rtcEngine.enableVideo()
-        
-        rtcEngine.setVideoProfile(52);
-        
+    
+
         //https://docs.agora.io/en/Video/API%20Reference/electron/enums/video_profile_type.html#video_profile_landscape_720p
         const logpath = path.join(os.homedir(), 'agorasdk.log')
         // set where log file should be put for problem diagnostic
         rtcEngine.setLogFile(logpath)
+
+        // rtcEngine.setParameters("{\"rtc.enable_proxy\":true}");
+        // rtcEngine.setParameters("{\"rtc.proxy_server\":[0, \"IP\", 1080]}");
+
         
         // join channel to rock!
         rtcEngine.joinChannel(null, "demoChannel", null, Math.floor(new Date().getTime() / 1000))
@@ -79,6 +99,10 @@ export default class App extends Component {
 
         return (
             <div>
+                <select　onChange={this.changeResolution}>
+                    <option value="720P">720P</option>
+                    <option value="480P">480P</option>
+                </select>
                 <div className="video" id="local"></div>
                 <div className="video" id="remote"></div>
                 {/* {logosRender} */}
